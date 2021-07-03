@@ -1,6 +1,6 @@
 <template>
 <!-- 整个对话框的遮罩 -->
-<transition name="w-dialog">
+<transition name="wtransition">
   <div class="w-dialog_wrapper" v-show="visible" @click.self="handleClose">
       <div class="w-dialog" :style="{width: width, marginTop: top}">
           <div class="w-dialog_header">
@@ -54,14 +54,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.w-dialog-enter{
-  opacity: 0;
+// css过渡的6个类别
+// .w-dialog-enter{
+//   opacity: 0;
+// }
+// .w-dialog-to{
+//   opacity: 1;
+// }
+// .w-dialog-enter-active{
+//   transform: all .5s;
+// }
+.wtransition-enter-active{
+  animation: run 0.5s;
 }
-.w-dialog-to{
-  opacity: 1;
+.wtransition-leave-active{
+  animation: run .5s reverse;
 }
-.w-dialog-enter-active{
-  transform: all .5s;
+@keyframes run {
+  0% {
+    opacity: 0;
+  transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+  transform: translateY(0);
+  }
 }
 .w-dialog_wrapper{
   position: fixed;
