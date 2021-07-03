@@ -1,6 +1,7 @@
 <template>
 <!-- 整个对话框的遮罩 -->
 <transition name="wtransition">
+  <!-- 使用transition的话 就会出现遮罩层也是一样的抖动 -->
   <div class="w-dialog_wrapper" v-show="visible" @click.self="handleClose">
       <div class="w-dialog" :style="{width: width, marginTop: top}">
           <div class="w-dialog_header">
@@ -54,6 +55,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// scoped将当前组件的模版中的所有的元素都添加一个随机属性，所有的样式添加一个对应的属性选择器
+// 原理就是组件库的样式覆盖不了的情况就可以用深度选择器 scss ::v-deep css>>> vue-loader里面
 // css过渡的6个类别
 // .w-dialog-enter{
 //   opacity: 0;
