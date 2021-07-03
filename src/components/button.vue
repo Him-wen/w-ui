@@ -52,7 +52,7 @@ export default {
     margin-left: 20px;
 }
 .w-button--primary{
-    background-color: blue;
+    background-color: rgb(173, 173, 223);
     
 }
 .w-button--success{
