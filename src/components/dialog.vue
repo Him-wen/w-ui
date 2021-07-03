@@ -1,19 +1,26 @@
 <template>
-  <div class="w-dialog_wrapper">
-      <div class="w-dialog">
+<!-- 整个对话框的遮罩 -->
+<transition name="w-dialog">
+  <div class="w-dialog_wrapper" v-show="visible" @click.self="handleClose">
+      <div class="w-dialog" :style="{width: width, marginTop: top}">
           <div class="w-dialog_header">
+            <slot name="title">
+              <!-- 具名插槽, slot被插入的地方 -->
               <span class="w-dialog_title">{{title}}</span>
-              <button class="w-dialog_headerbtn">关闭</button>
+            </slot>
+              <button class="w-dialog_headerbtn" @click="handleClose">关闭</button>
           </div>
           <div class="w-dialog_body">
-              <span>这是一段信息</span>
+              <!-- <span>这是一段信息</span> 默认插槽 -->
+              <slot />
           </div>
-          <div class="w-dialog_footer">
-              <w-button>取消</w-button>
-              <w-button type="primary">确定</w-button>
+          <!-- v-if="$slots.footer"表示传了slot内容才显示dom块 -->
+          <div class="w-dialog_footer" v-if="$slots.footer">
+              <slot name="footer"></slot>
           </div>
       </div>
   </div>
+</transition>
 </template>
 
 <script>
@@ -23,15 +30,39 @@ export default {
       title: {
         type: String,
         default: '默认'
+      },
+      width: {// 宽度
+        type: String,
+        default:'50%',
+      },
+      top: {// 高度
+        type: String,
+        default:'15vh',
+      },
+      visible: {
+        type: Boolean,
+        default: false,
       }
     },
     methods: {
-
+      handleClose: function() {
+        console.log('哈哈');
+        this.$emit('update:visible', false)// 这里的写法固定
+      }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.w-dialog-enter{
+  opacity: 0;
+}
+.w-dialog-to{
+  opacity: 1;
+}
+.w-dialog-enter-active{
+  transform: all .5s;
+}
 .w-dialog_wrapper{
   position: fixed;
   top: 0;
