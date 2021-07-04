@@ -2,6 +2,7 @@
 <!-- 整个对话框的遮罩 -->
 <transition name="wtransition">
   <!-- 使用transition的话 就会出现遮罩层也是一样的抖动 -->
+  <!-- click.self控制关闭冒泡 -->
   <div class="w-dialog_wrapper" v-show="visible" @click.self="handleClose">
       <div class="w-dialog" :style="{width: width, marginTop: top}">
           <div class="w-dialog_header">
