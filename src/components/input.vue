@@ -1,7 +1,8 @@
 <template>
   <div class="w-input" :class="{'w-input_suffix': showsuffix}">
+      <!--自己提供一个属性trantype来进行切换 -->
       <input 
-      :type="type" 
+      :type="showpassword ? (trantype ? 'text' : 'password') :type" 
       :name="name"
       class="w-input_inner"
       :class="{'is-disabled': disabled}"
@@ -12,7 +13,7 @@
       >
     <span class="w-input_suffix" v-if="showsuffix">
         <w-button type="primary" v-if="clearable">关闭</w-button>
-        <w-button type="primary" v-if="showpassword">隐藏</w-button>
+        <w-button type="primary" v-if="showpassword" @click="handlepassword">隐藏</w-button>
     </span>
   </div>
 </template>
@@ -45,14 +46,14 @@ export default {
           type: Boolean,
           default: false
       },
-      showpassword: {
+      showpassword: {// 表示密码框
           type: Boolean,
           default: false
       }
     },
     data() {
         return {
-
+            trantype:false
         }
     },
     computed: {
@@ -63,6 +64,9 @@ export default {
     methods: {
         handleInput: function(e) {
             this.$emit('input', e.target.value)
+        },
+        handlepassword: function() {
+            this.trantype = !this.trantype;
         }
     }
 }
