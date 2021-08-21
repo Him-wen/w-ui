@@ -48,7 +48,7 @@ export default {
     },
     methods: {
       handleClose: function() {
-        console.log('哈哈');
+        console.log('hahaha');
         this.$emit('update:visible', false)// 这里的写法固定
       }
     }
